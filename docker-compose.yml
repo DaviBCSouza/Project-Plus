@@ -1,0 +1,52 @@
+services:
+  mysql:
+    container_name: project_plus_db
+    image: mysql:latest
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - ${MYSQL_PORT}:3306
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
+    networks:
+      - project_plus_network
+
+  backend:
+    container_name: project_plus_backend
+    build:
+      context: ./backend
+      dockerfile: dockerfile
+      args:
+        - VERSION=v1
+    volumes:
+      - ./backend/:/app/
+      - /app/node_modules
+    ports:
+      - ${BACKEND_PORT}:${BACKEND_PORT}
+    networks:
+      - project_plus_network
+
+  frontend:
+    container_name: project_plus_frontend
+    build:
+      context: ./frontend
+      dockerfile: dockerfile
+      args:
+        - VERSION=v1
+    ports:
+      - ${FRONTEND_PORT}:${FRONTEND_PORT}
+    volumes:
+      - ./frontend/:/app/
+      - /app/node_modules
+      - /app/.next
+    networks:
+      - project_plus_network
+networks:
+  project_plus_network:
+    driver: bridge
+volumes:
+  mysql_data:
+  mysql_config:

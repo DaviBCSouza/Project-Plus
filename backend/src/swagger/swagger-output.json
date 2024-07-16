@@ -1,0 +1,14 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API do Sistema Project +",
+    "description": "Documentação da API",
+    "version": "1.0.0"
+  },
+  "host": "localhost:1100",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {}
+}
