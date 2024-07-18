@@ -50,3 +50,19 @@
 - Em seguida `git commit -m "nome_do_commit"`
 - Por fim `git push --set-upstream origin 'nome_da_branch_atual'`
 - (Hint do passo acima: esse push você só deve dar uma vez, na próxima, se caso estiver na branch criada é so utiliza `git push`)
+
+## [Prefixos dos Commits](https://github.com/JuniorLima22/padroes-e-nomenclaturas-no-git#prefixos-dos-commits)
+
+Observe que os prefixos abaixo foram personalizados com base no artigo do link acima.
+
+- :books: [DOCS]: apenas mudanças de documentação.
+- :sparkles: [FEAT]: Adição de uma nova feature ao projeto, componente, etc.
+- :lady_beetle: [FIX]: Correção de um bug.
+- :zap: [PERF]: Melhoria de performance.
+- :recycle: [REFACTOR]: Refatoração do código que não adiciona uma funcionalidade nem corrige um bug.
+- :art: [STYLE]: Mudanças no código que não afetam seu significado (espaço em branco, formatação, ponto e vírgula, etc).
+- :test_tube: [TEST]: Adição ou correção de testes.
+- :rocket: [IMPROVEMENT]: Melhoria em algo já existente, seja de performance, escrita, layout, etc.
+- :floppy_disk: [PRISMA]: Alterações relacionadas ao Prisma, como mudanças no esquema ou nas migrações.
+- :hammer_and_wrench: [DEVOPS]: Configuração ou mudanças relacionadas ao DevOps, como CI/CD, dockerização, scripts de deploy, etc.
+- :hammer_and_pick: [MERGE]: Realizando merge de outras branches na main ou vice-versa.
