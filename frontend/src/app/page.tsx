@@ -1,15 +1,15 @@
-import { Box, Typography } from "@mui/material";
+import CardList from "./components/Home/CardList";
+import Navbar from "./components/Home/Navbar";
+import SearchBar from "./components/Home/SearchBar";
 
-export default function Home() {
+const Home = () => {
   return (
-    <Box
-      alignItems="center"
-      display="flex"
-      flexDirection="column"
-      justifyContent="center"
-    >
-      <Typography variant="h3">Project +</Typography>
-      <Typography component="p">Hello, Project +</Typography>
-    </Box>
+    <>
+      <Navbar />
+      <SearchBar />
+      <CardList />
+    </>
   );
-}
+};
+
+export default Home;
