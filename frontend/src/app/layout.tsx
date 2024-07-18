@@ -1,7 +1,8 @@
-import "bootstrap/dist/css/bootstrap.min.css";
+import { CssBaseline } from "@mui/material";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
+import { ThemeProvider } from "@mui/material/styles";
 import type { Metadata } from "next";
-import BootstrapClient from "./components/BootstrapClient";
-import { ReactQueryClientProvider } from "./components/ReactQueryClient";
+import theme from "./theme/theme";
 
 export const metadata: Metadata = {
   title: "Project +",
@@ -14,13 +15,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" data-bs-theme="dark">
-      <body>
-        <ReactQueryClientProvider>
-          {children}
-          <BootstrapClient />
-        </ReactQueryClientProvider>
-      </body>
+    <html lang="pt-BR">
+      <AppRouterCacheProvider>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <body>{children}</body>
+        </ThemeProvider>
+      </AppRouterCacheProvider>
     </html>
   );
 }
