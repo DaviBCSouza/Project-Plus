@@ -2,11 +2,11 @@ import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 
 import {
-  obterUsuarioPorId,
-  obterUsuarios,
-  criarUsuario,
-  atualizarUsuario,
-  deletarUsuario,
+  createUser,
+  deleteUser,
+  findAllUsers,
+  findUserById,
+  updateUser,
 } from "./user.service";
 
 // definindo metodos que resgatam dados do banco de dados
@@ -28,8 +28,8 @@ const getById = async (req: Request, res: Response) => {
 
   try {
     const { id } = req.params;
-    const usuario = await obterUsuarioPorId(id);
-    res.status(StatusCodes.OK).json(usuario);
+    const user = await findUserById(id);
+    res.status(StatusCodes.OK).json(user);
   } catch (erro) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(erro);
   }
@@ -45,8 +45,8 @@ const getAll = async (_: Request, res: Response) => {
    */
 
   try {
-    const usuarios = await obterUsuarios();
-    res.status(StatusCodes.OK).json(usuarios);
+    const users = await findAllUsers();
+    res.status(StatusCodes.OK).json(users);
   } catch (erro) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(erro);
   }
@@ -71,8 +71,8 @@ const create = async (req: Request, res: Response) => {
    */
 
   try {
-    const usuario = await criarUsuario(req.body);
-    res.status(StatusCodes.CREATED).json(usuario);
+    const user = await createUser(req.body);
+    res.status(StatusCodes.CREATED).json(user);
   } catch (erro) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(erro);
   }
@@ -104,14 +104,14 @@ const update = async (req: Request, res: Response) => {
 
   try {
     const { id } = req.params;
-    const usuario = await atualizarUsuario(id, req.body);
-    res.status(StatusCodes.OK).json(usuario);
+    const user = await updateUser(id, req.body);
+    res.status(StatusCodes.OK).json(user);
   } catch (erro) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(erro);
   }
 };
 
-const deleteUser = async (req: Request, res: Response) => {
+const remove = async (req: Request, res: Response) => {
   /*
     #swagger.summary = 'Deletar um usuário'
     #swagger.description = 'Endpoint para deletar um usuário'
@@ -137,17 +137,17 @@ const deleteUser = async (req: Request, res: Response) => {
 
   try {
     const { id } = req.params;
-    const usuario = await deletarUsuario(id, req.body.razaoExclusao);
-    res.status(StatusCodes.OK).json(usuario);
+    const user = await deleteUser(id);
+    res.status(StatusCodes.OK).json(user);
   } catch (erro) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(erro);
   }
 };
 
 export default {
-  getById: getById,
-  getAll: getAll,
-  create: create,
-  update: update,
-  deleteUser: deleteUser,
+  getById,
+  getAll,
+  create,
+  update,
+  remove,
 };

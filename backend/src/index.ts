@@ -1,10 +1,19 @@
+import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import express from "express";
 import swaggerUi from "swagger-ui-express";
+import { v4 as uuidv4 } from "uuid";
 
+import session from "express-session";
 import router from "./router";
 import swaggerFile from "./swagger/swagger-output.json";
 import validateEnv from "./utils/validateEnv";
+
+declare module "express-session" {
+  interface SessionData {
+    uid: string;
+  }
+}
 
 dotenv.config();
 validateEnv();
@@ -12,9 +21,20 @@ validateEnv();
 const app = express();
 const PORT = process.env.PORT ?? 5000;
 
+app.use("/api", swaggerUi.serve, swaggerUi.setup(swaggerFile));
+
+app.use(
+  session({
+    genid: () => uuidv4(),
+    secret: "StMf#She#mj34se#dSm",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+
+app.use(cookieParser());
 app.use(express.json());
 app.use(router);
-app.use("/api", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando em https://localhost:${PORT}`);

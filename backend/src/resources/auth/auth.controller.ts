@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 
-import { criarUsuario } from "../usuario/usuario.service";
-import { verificarCredenciais } from "./auth.services";
+import { createUser } from "../user/user.service";
+import { checkCredentials } from "./auth.service";
 
 const signup = async (req: Request, res: Response) => {
   /*
@@ -22,8 +22,8 @@ const signup = async (req: Request, res: Response) => {
    */
 
   try {
-    const usuario = await criarUsuario(req.body);
-    return res.status(StatusCodes.CREATED).json(usuario);
+    const user = await createUser(req.body);
+    return res.status(StatusCodes.CREATED).json(user);
   } catch (erro) {
     return res.status(StatusCodes.BAD_REQUEST).json(erro);
   }
@@ -49,14 +49,14 @@ const login = async (req: Request, res: Response) => {
 
   const credentials = req.body;
   try {
-    const usuario = await verificarCredenciais(credentials);
-    if (!usuario)
+    const user = await checkCredentials(credentials);
+    if (!user)
       return res
         .status(StatusCodes.UNAUTHORIZED)
         .json(StatusCodes.UNAUTHORIZED);
 
-    req.session.uid = usuario.id;
-    res.status(StatusCodes.OK).json(usuario);
+    req.session.uid = user.id;
+    res.status(StatusCodes.OK).json(user);
   } catch (err) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
   }

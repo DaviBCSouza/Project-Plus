@@ -1,12 +1,14 @@
 import { Router } from "express";
-import usuarioController from "./user.controller";
+import { validateBody } from "../../middlewares/validateBody";
+import userController from "./user.controller";
+import { userPost, userPut } from "./user.schemas";
 
 const router = Router();
 
-router.get("/", usuarioController.getAll);
-router.get("/:id", usuarioController.getById);
-router.post("/", usuarioController.create);
-router.put("/:id", usuarioController.update);
-router.delete("/:id", usuarioController.deleteUser);
+router.get("/", userController.getAll);
+router.get("/:id", userController.getById);
+router.post("/", validateBody(userPost), userController.create);
+router.put("/:id", validateBody(userPut), userController.update);
+router.delete("/:id", userController.remove);
 
 export default router;
