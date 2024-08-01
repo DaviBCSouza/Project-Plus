@@ -11,6 +11,19 @@
     "http"
   ],
   "paths": {
+    "/auth/check": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/auth/signup": {
       "post": {
         "tags": [
@@ -71,7 +84,7 @@
       }
     },
     "/auth/logout": {
-      "delete": {
+      "post": {
         "tags": [
           "Auth"
         ],
@@ -230,6 +243,161 @@
           }
         }
       }
+    },
+    "/project/": {
+      "get": {
+        "tags": [
+          "Projeto"
+        ],
+        "summary": "Obtém todos os projetos",
+        "description": "Endpoint para obter todos os projetos cadastrados no sistema",
+        "responses": {
+          "200": {
+            "description": "Projetos obtidos com sucesso"
+          },
+          "500": {
+            "description": "Erro ao obter projeto"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Projeto"
+        ],
+        "summary": "Cria um novo projeto.",
+        "description": "Endpoint para adicionar um novo projeto no sistema.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados do projeto",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CriarProjetoDTO"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "projeto criado"
+          },
+          "400": {
+            "description": "Requisição inválida"
+          },
+          "422": {
+            "description": "Objeto inválido: não processável"
+          },
+          "500": {
+            "description": "Erro ao criar projeto"
+          }
+        }
+      }
+    },
+    "/project/{id}": {
+      "get": {
+        "tags": [
+          "Projeto"
+        ],
+        "summary": "Obtém uma projeto pelo ID",
+        "description": "Endpoint para obter um projeto específico pelo seu ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do projeto"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Projeto obtido com sucesso"
+          },
+          "500": {
+            "description": "Erro ao obter projeto"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Projeto"
+        ],
+        "summary": "Atualiza um projeto existente",
+        "description": "Endpoint para atualizar um projeto existente",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do projeto a ser atualizado"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "projeto atualizada com sucesso"
+          },
+          "400": {
+            "description": "Requisição inválida"
+          },
+          "422": {
+            "description": "Objeto inválido: não processável"
+          },
+          "500": {
+            "description": "Erro ao atualizar projeto"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Projeto"
+        ],
+        "summary": "Deleta um projeto existente",
+        "description": "Endpoint para deletar um projeto pelo seu ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do projeto a ser deletada"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Projeto deletado com sucesso"
+          },
+          "500": {
+            "description": "Erro ao deletar projeto"
+          }
+        }
+      }
+    },
+    "/project/user/{id}": {
+      "get": {
+        "tags": [
+          "Projeto"
+        ],
+        "summary": "Obtém projeto pelo ID do usuário",
+        "description": "Endpoint para obter todas os projetos de um usuário específico pelo seu ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do usuário"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "projetos obtidos com sucesso"
+          },
+          "500": {
+            "description": "Erro ao obter projeto"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -306,6 +474,90 @@
         "status": {
           "type": "string",
           "example": "ATIVO"
+        }
+      }
+    },
+    "ProjetoDTO": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "Título do Projeto"
+        },
+        "location": {
+          "type": "string",
+          "example": "Descrição do Projeto"
+        },
+        "createdBy": {
+          "type": "string",
+          "example": "Criador do Projeto"
+        },
+        "date": {
+          "type": "string",
+          "example": "2024-03-03T18:35:15.621Z"
+        },
+        "idUser": {
+          "type": "string",
+          "example": "ID do Usuário Responsável pelo Projeto"
+        }
+      }
+    },
+    "CriarProjetoDTO": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "Título do Projeto"
+        },
+        "location": {
+          "type": "string",
+          "example": "Descrição do Projeto"
+        },
+        "createdBy": {
+          "type": "string",
+          "example": "Criador do Projeto"
+        },
+        "date": {
+          "type": "string",
+          "example": "2024-03-03T18:35:15.621Z"
+        },
+        "idUser": {
+          "type": "string",
+          "example": "ID do Usuário Responsável pelo Projeto"
+        }
+      }
+    },
+    "AtualizarProjetoDTO": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "Título do Projeto"
+        },
+        "location": {
+          "type": "string",
+          "example": "Descrição do Projeto"
+        },
+        "createdBy": {
+          "type": "string",
+          "example": "Criador do Projeto"
+        },
+        "date": {
+          "type": "string",
+          "example": "2024-03-03T18:35:15.621Z"
+        },
+        "idUser": {
+          "type": "string",
+          "example": "Id do Usuário Responsável pelo Projeto"
+        }
+      }
+    },
+    "DeletarProjetoDTO": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "Id do Projeto a Excluir"
         }
       }
     }

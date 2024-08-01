@@ -31,6 +31,30 @@ const doc = {
       password: "654321",
       status: "ATIVO",
     },
+    ProjetoDTO: {
+      title: "Título do Projeto",
+      location: "Descrição do Projeto",
+      createdBy: "Criador do Projeto",
+      date: "2024-03-03T18:35:15.621Z",
+      idUser: "ID do Usuário Responsável pelo Projeto",
+    },
+    CriarProjetoDTO: {
+      title: "Título do Projeto",
+      location: "Descrição do Projeto",
+      createdBy: "Criador do Projeto",
+      date: "2024-03-03T18:35:15.621Z",
+      idUser: "ID do Usuário Responsável pelo Projeto",
+    },
+    AtualizarProjetoDTO: {
+      title: "Título do Projeto",
+      location: "Descrição do Projeto",
+      createdBy: "Criador do Projeto",
+      date: "2024-03-03T18:35:15.621Z",
+      idUser: "Id do Usuário Responsável pelo Projeto",
+    },
+    DeletarProjetoDTO: {
+      id: "Id do Projeto a Excluir",
+    },
   },
   host: `${process.env.HOST}:${process.env.PORT}`,
 };

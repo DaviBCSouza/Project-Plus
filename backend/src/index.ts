@@ -38,6 +38,10 @@ app.use(
     secret: "StMf#She#mj34se#dSm",
     resave: true,
     saveUninitialized: true,
+    cookie: {
+      sameSite: "none",
+      secure: true,
+    },
   })
 );
 
