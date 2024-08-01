@@ -29,7 +29,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({
   text,
 }) => (
   <ImageContainer>
-    <Image src={src} alt={alt} width={width} height={height} />
+    <Image src={src} alt={alt} width={width} height={height} priority />
     <Text align="center" variant="h6">
       {text}
     </Text>

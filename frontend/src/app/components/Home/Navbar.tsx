@@ -77,6 +77,9 @@ const CustomMenu = styled(Menu)({
 });
 
 export default function Navbar() {
+  // const { logout, openAlert, alertMessage, alertSeverity, setOpenAlert } =
+  //   useLogout();
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -88,68 +91,89 @@ export default function Navbar() {
     setAnchorEl(null);
   };
 
+  // const handleLogout = async () => {
+  //   await logout();
+  // };
+
   return (
-    <CustomBox id="inicio">
-      <CustomAppBar position="fixed">
-        <CustomToolbar variant="regular">
-          <IconButton aria-label="logo" color="inherit" edge="start" href="/">
-            <Image alt="Logo" src="/logo.svg" height={50} width={95} priority />
-          </IconButton>
-          <CustomTypo color="primary" fontWeight="bold" variant="h6">
-            Project +
-          </CustomTypo>
-          <Box display="flex" alignItems="center">
-            <IconButton color="primary">
-              <Notifications />
-            </IconButton>
-            <Typography variant="body1" color="primary" sx={{ ml: 2 }}>
-              Nome do Usuário
-            </Typography>
-            <IconButton
-              aria-label="profile"
-              color="inherit"
-              edge="end"
-              onClick={handleClick}
-            >
-              <Avatar
-                alt="User Profile"
-                src=""
-                sx={{ width: 40, height: 40 }}
+    <>
+      <CustomBox id="inicio">
+        <CustomAppBar position="fixed">
+          <CustomToolbar variant="regular">
+            <IconButton aria-label="logo" color="inherit" edge="start" href="/">
+              <Image
+                alt="Logo"
+                src="/logo.svg"
+                height={50}
+                width={95}
+                priority
               />
             </IconButton>
-            <CustomMenu
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "right",
-              }}
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-            >
-              <MenuItem onClick={handleClose}>
-                <AccountCircle fontSize="small" sx={{ mr: 1 }} />
-                Gerenciar conta
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <CustomLink href="/others/vagas" passHref>
-                  <Box display="flex" alignItems="center">
-                    <AccountTree fontSize="small" sx={{ mr: 1 }} />
-                    <Typography color="inherit">Meus Projetos</Typography>
-                  </Box>
-                </CustomLink>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <ExitToApp fontSize="small" sx={{ mr: 1 }} />
-                <Typography color="inherit">Sair</Typography>
-              </MenuItem>
-            </CustomMenu>
-          </Box>
-        </CustomToolbar>
-      </CustomAppBar>
-    </CustomBox>
+            <CustomTypo color="primary" fontWeight="bold" variant="h6">
+              Project +
+            </CustomTypo>
+            <Box display="flex" alignItems="center">
+              <IconButton color="primary">
+                <Notifications />
+              </IconButton>
+              <Typography variant="body1" color="primary" sx={{ ml: 2 }}>
+                Nome do Usuário
+              </Typography>
+              <IconButton
+                aria-label="profile"
+                color="inherit"
+                edge="end"
+                onClick={handleClick}
+              >
+                <Avatar
+                  alt="User Profile"
+                  src=""
+                  sx={{ width: 40, height: 40 }}
+                />
+              </IconButton>
+              <CustomMenu
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "right",
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+              >
+                <MenuItem onClick={handleClose}>
+                  <AccountCircle fontSize="small" sx={{ mr: 1 }} />
+                  Gerenciar conta
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <CustomLink href="/others/vagas" passHref>
+                    <Box display="flex" alignItems="center">
+                      <AccountTree fontSize="small" sx={{ mr: 1 }} />
+                      <Typography color="inherit">Meus Projetos</Typography>
+                    </Box>
+                  </CustomLink>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <ExitToApp fontSize="small" sx={{ mr: 1 }} />
+                  <Typography color="inherit">Sair</Typography>
+                </MenuItem>
+              </CustomMenu>
+            </Box>
+          </CustomToolbar>
+        </CustomAppBar>
+      </CustomBox>
+      {/* <Snackbar
+        open={openAlert}
+        autoHideDuration={2200}
+        onClose={() => setOpenAlert(false)}
+      >
+        <Alert onClose={() => setOpenAlert(false)} severity={alertSeverity}>
+          {alertMessage}
+        </Alert>
+      </Snackbar> */}
+    </>
   );
 }
