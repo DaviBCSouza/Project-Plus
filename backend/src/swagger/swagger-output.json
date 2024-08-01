@@ -10,5 +10,226 @@
   "schemes": [
     "http"
   ],
-  "paths": {}
+  "paths": {
+    "/signup": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Cadastrar um novo usuário",
+        "description": "Endpoint para cadastrar um novo usuário",
+        "parameters": [
+          {
+            "name": "novoUsuario",
+            "description": "Informações do novo usuário",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Signup"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Usuário criado com sucesso"
+          },
+          "400": {
+            "description": "Erro ao criar usuário"
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Autenticar um usuário",
+        "description": "Endpoint para autenticar um usuário",
+        "parameters": [
+          {
+            "name": "credenciais",
+            "description": "Credenciais do usuário",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Login"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuário autenticado"
+          },
+          "401": {
+            "description": "Credenciais inválidas"
+          },
+          "500": {
+            "description": "Erro no servidor"
+          }
+        }
+      }
+    },
+    "/logout": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Deslogar um usuário",
+        "description": "Endpoint para deslogar um usuário",
+        "parameters": [
+          {
+            "name": "uid",
+            "description": "ID do usuário",
+            "in": "session",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuário deslogado"
+          },
+          "401": {
+            "description": "Usuário não autenticado"
+          }
+        }
+      }
+    },
+    "/user/": {
+      "get": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Buscar todos os usuários",
+        "description": "Endpoint para buscar todos os usuários",
+        "responses": {
+          "200": {
+            "description": "Usuários encontrados"
+          },
+          "500": {
+            "description": "Erro no servidor"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Criar um usuário",
+        "description": "Endpoint para criar um usuário",
+        "parameters": [
+          {
+            "name": "usuario",
+            "description": "Informações do usuário",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CriarUsuarioDTO"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Usuário criado"
+          },
+          "500": {
+            "description": "Erro no servidor"
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "get": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Buscar um usuário pelo ID",
+        "description": "Endpoint para buscar um usuário pelo ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do usuário"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuário encontrado"
+          },
+          "500": {
+            "description": "Erro no servidor"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Atualizar um usuário",
+        "description": "Endpoint para atualizar um usuário",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do usuário"
+          },
+          {
+            "name": "usuario",
+            "description": "Informações do usuário",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AtualizarUsuarioDTO"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuário atualizado"
+          },
+          "500": {
+            "description": "Erro no servidor"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Deletar um usuário",
+        "description": "Endpoint para deletar um usuário",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do usuário"
+          },
+          {
+            "name": "razaoExclusao",
+            "description": "Razão da exclusão",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeletarUsuarioDTO"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuário deletado"
+          },
+          "500": {
+            "description": "Erro no servidor"
+          }
+        }
+      }
+    }
+  }
 }

@@ -6,10 +6,18 @@ import React from "react";
 const Step1: React.FC<Step1Props> = ({
   formData,
   handleChange,
-  handleNext,
+  handleSubmit,
 }) => {
   return (
     <Box>
+      <TextField
+        label="Username"
+        value={formData.name}
+        onChange={handleChange("name")}
+        fullWidth
+        margin="normal"
+        variant="outlined"
+      />
       <TextField
         label="Email"
         value={formData.email}
@@ -28,14 +36,8 @@ const Step1: React.FC<Step1Props> = ({
         variant="outlined"
       />
 
-      <Button
-        color="primary"
-        variant="contained"
-        onClick={handleNext}
-        sx={{ mt: 2 }}
-        fullWidth
-      >
-        Próximo
+      <Button color="secondary" variant="contained" onClick={handleSubmit}>
+            Concluir
       </Button>
       <Typography align="center" mt={"5%"}>
         Já possui uma conta?
