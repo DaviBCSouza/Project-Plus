@@ -12,3 +12,13 @@ export interface ImageWithTextProps {
   height: number;
   text: string;
 }
+
+export interface LoginData {
+  email: string;
+  password: string;
+}
+
+export const initialLoginState: LoginData = {
+  email: "",
+  password: "",
+};

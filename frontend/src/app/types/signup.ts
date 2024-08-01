@@ -15,7 +15,7 @@ export interface SecondaryImageProps {
 
 export interface Step1Props {
   formData: {
-    userType: string;
+    name: string;
     email: string;
     password: string;
   };
@@ -24,24 +24,26 @@ export interface Step1Props {
   ) => (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
-  handleNext: () => void;
-}
-
-export interface Step2Props {
-  formData: {
-    username: string;
-  };
-  handleChange: (
-    field: string
-  ) => (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => void;
-  handlePrev: () => void;
   handleSubmit: () => void;
 }
 
 export interface FormData {
   email: string;
-  username: string;
+  name: string;
   password: string;
+}
+
+export const initialFormState: FormData = {
+  email: "",
+  password: "",
+  name: ""
+};
+
+export type AlertSeverity = "success" | "error";
+
+export interface UserResponse {
+  name: string;
+  email: string;
+  password: string;
+  status: string;
 }
