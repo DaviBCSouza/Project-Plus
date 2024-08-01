@@ -11,7 +11,7 @@
     "http"
   ],
   "paths": {
-    "/signup": {
+    "/auth/signup": {
       "post": {
         "tags": [
           "Auth"
@@ -39,8 +39,8 @@
         }
       }
     },
-    "/login": {
-      "post": {
+    "/auth/login": {
+      "put": {
         "tags": [
           "Auth"
         ],
@@ -70,8 +70,8 @@
         }
       }
     },
-    "/logout": {
-      "post": {
+    "/auth/logout": {
+      "delete": {
         "tags": [
           "Auth"
         ],
@@ -228,6 +228,84 @@
           "500": {
             "description": "Erro no servidor"
           }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Signup": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "usuario"
+        },
+        "email": {
+          "type": "string",
+          "example": "usuario@gmail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "123456"
+        },
+        "status": {
+          "type": "string",
+          "example": "ATIVO"
+        }
+      }
+    },
+    "Login": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "usuario@gmail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "123456"
+        }
+      }
+    },
+    "CriarUsuarioDTO": {
+      "type": "object",
+      "properties": {
+        "nome": {
+          "type": "string",
+          "example": "usuario exemplo"
+        },
+        "email": {
+          "type": "string",
+          "example": "usuarioExemplo@gmail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "123456"
+        },
+        "status": {
+          "type": "string",
+          "example": "ATIVO"
+        }
+      }
+    },
+    "AtualizarUsuarioDTO": {
+      "type": "object",
+      "properties": {
+        "nome": {
+          "type": "string",
+          "example": "usuario exemplo editado"
+        },
+        "email": {
+          "type": "string",
+          "example": "usuarioEditado@gmail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "654321"
+        },
+        "status": {
+          "type": "string",
+          "example": "ATIVO"
         }
       }
     }

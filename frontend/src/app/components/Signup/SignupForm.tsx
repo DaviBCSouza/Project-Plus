@@ -1,11 +1,11 @@
 "use client";
 
-import { Box, LinearProgress, Typography } from "@mui/material";
+import { useSignup } from "@/app/hooks/useSignUp";
+import { Alert, Box, Snackbar, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { useState } from "react";
 import { FormData, initialFormState } from "../../types/signup";
 import Step1 from "./Step1";
-import { useSignup } from "@/app/hooks/useSignUp";
 
 const FormBox = styled(Box)({
   position: "absolute",
@@ -21,7 +21,6 @@ const FormBox = styled(Box)({
 
 const SignupForm = () => {
   const [formData, setFormData] = useState<FormData>(initialFormState);
-  const [currentStep, setCurrentStep] = useState(0);
   const { signup, openAlert, alertMessage, alertSeverity, setOpenAlert } =
     useSignup();
 
@@ -41,13 +40,12 @@ const SignupForm = () => {
     }
   };
 
-
   return (
     <FormBox>
       <Typography align="center" component="h2" variant="h6">
         <span style={{ color: "orange" }}>Bem vindo ao</span> CADASTRO
       </Typography>
-     
+
       <Typography
         align="center"
         color={"gray"}
@@ -59,6 +57,15 @@ const SignupForm = () => {
         Preencha os dados para cadastro
       </Typography>
       <Step1 formData={formData} handleChange={change} handleSubmit={submit} />
+      <Snackbar
+        open={openAlert}
+        autoHideDuration={2200}
+        onClose={() => setOpenAlert(false)}
+      >
+        <Alert onClose={() => setOpenAlert(false)} severity={alertSeverity}>
+          {alertMessage}
+        </Alert>
+      </Snackbar>
     </FormBox>
   );
 };

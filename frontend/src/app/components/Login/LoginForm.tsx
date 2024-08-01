@@ -27,7 +27,7 @@ const FormBox = styled(Box)({
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
-  const [password, setSenha] = useState("");
+  const [password, setPassword] = useState("");
   const {
     login,
     loading,
@@ -75,7 +75,7 @@ const LoginForm = () => {
         type="password"
         variant="outlined"
         value={password}
-        onChange={(e) => setSenha(e.target.value)}
+        onChange={(e) => setPassword(e.target.value)}
         sx={{ marginTop: "10%" }}
         fullWidth
       />

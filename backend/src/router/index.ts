@@ -6,7 +6,7 @@ import userRouter from "../resources/user/user.router";
 const router = Router();
 
 router.use(
-  "/",
+  "/auth",
   // #swagger.tags = ["Auth"]
   authRouter
 );

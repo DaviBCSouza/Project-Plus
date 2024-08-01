@@ -4,11 +4,11 @@ import express from "express";
 import swaggerUi from "swagger-ui-express";
 import { v4 as uuidv4 } from "uuid";
 
+import cors from "cors";
 import session from "express-session";
 import router from "./router";
 import swaggerFile from "./swagger/swagger-output.json";
 import validateEnv from "./utils/validateEnv";
-import cors from "cors";
 
 declare module "express-session" {
   interface SessionData {
@@ -21,6 +21,7 @@ validateEnv();
 
 const app = express();
 const PORT = process.env.PORT ?? 5000;
+
 // Configuração do CORS
 const corsOptions = {
   origin: "http://localhost:1200",
