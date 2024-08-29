@@ -1,3 +1,4 @@
+import { useCreateProject } from "@/app/hooks/useCreateProject";
 import { Add } from "@mui/icons-material";
 import {
   Box,
@@ -8,10 +9,17 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
+import { format } from "date-fns";
 import { useState } from "react";
 
-export default function ModalAddProject() {
+export default function ModalAddProject({ onAddProject }: any) {
   const [open, setOpen] = useState(false);
+  const [title, setTitle] = useState("");
+  const [location, setLocation] = useState("");
+  const [createdBy, setCreatedBy] = useState("");
+  const [date, setDate] = useState("");
+
+  const { createProject, loading, error } = useCreateProject();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -19,6 +27,29 @@ export default function ModalAddProject() {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleSave = async () => {
+    const formattedDate = format(
+      new Date(date),
+      "yyyy-MM-dd'T'HH:mm:ss.SSSxxx"
+    );
+
+    const projectData = {
+      title,
+      location,
+      createdBy,
+      date: formattedDate,
+      idUser: "ca4bfb7b-8521-4c49-9910-b749d953dbe2",
+    };
+
+    const newProject = await createProject(projectData);
+
+    if (newProject) {
+      onAddProject(newProject); // Adiciona o novo projeto à lista
+    }
+
+    handleClose();
   };
 
   return (
@@ -42,38 +73,46 @@ export default function ModalAddProject() {
             margin="dense"
             label="Nome do Projeto"
             type="text"
-            fullWidth
             variant="outlined"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            fullWidth
           />
           <TextField
             margin="dense"
             label="Localização"
             type="text"
-            fullWidth
             variant="outlined"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            fullWidth
           />
           <TextField
             margin="dense"
             label="Criado Por"
             type="text"
-            fullWidth
             variant="outlined"
+            value={createdBy}
+            onChange={(e) => setCreatedBy(e.target.value)}
+            fullWidth
           />
           <TextField
             margin="dense"
             label="Data"
-            type="date"
-            fullWidth
+            type="datetime-local"
             InputLabelProps={{ shrink: true }}
             variant="outlined"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            fullWidth
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Cancelar
           </Button>
-          <Button onClick={handleClose} color="primary">
-            Salvar
+          <Button onClick={handleSave} color="primary" disabled={loading}>
+            {loading ? "Salvando..." : "Salvar"}
           </Button>
         </DialogActions>
       </Dialog>
