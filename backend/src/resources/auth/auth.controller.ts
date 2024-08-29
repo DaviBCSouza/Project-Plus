@@ -86,4 +86,12 @@ const logout = async (req: Request, res: Response) => {
   }
 };
 
-export default { signup, login, logout };
+const getUser = async (req: Request, res: Response) => {
+  if (req.session.uid) {
+    res.status(StatusCodes.OK).json({ isLoggedIn: true });
+  } else {
+    res.status(StatusCodes.UNAUTHORIZED).json({ isLoggedIn: false });
+  }
+};
+
+export default { signup, login, logout, getUser };

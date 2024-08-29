@@ -2,6 +2,8 @@ import { CssBaseline } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import { ThemeProvider } from "@mui/material/styles";
 import type { Metadata } from "next";
+import ProtectedRouter from "./components/ProtectedRouter";
+import { AuthProvider } from "./context/AuthProvider";
 import theme from "./theme/theme";
 
 export const metadata: Metadata = {
@@ -16,12 +18,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <AppRouterCacheProvider>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <body>{children}</body>
-        </ThemeProvider>
-      </AppRouterCacheProvider>
+      <body>
+        <AppRouterCacheProvider>
+          <ThemeProvider theme={theme}>
+            <AuthProvider>
+              <ProtectedRouter>
+                <CssBaseline />
+                {children}
+              </ProtectedRouter>
+            </AuthProvider>
+          </ThemeProvider>
+        </AppRouterCacheProvider>
+      </body>
     </html>
   );
 }

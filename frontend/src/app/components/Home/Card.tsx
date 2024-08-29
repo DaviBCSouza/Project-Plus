@@ -44,7 +44,7 @@ const ProjectCard: React.FC<CardProps> = ({
   image,
   title,
   location,
-  createBy,
+  createdBy,
   date,
 }) => {
   return (
@@ -63,7 +63,7 @@ const ProjectCard: React.FC<CardProps> = ({
             {title}
           </Typography>
           <ProjectDetails>{location}</ProjectDetails>
-          <ProjectDetails>{createBy}</ProjectDetails>
+          <ProjectDetails>{createdBy}</ProjectDetails>
           <ProjectDetails>{date}</ProjectDetails>
         </CardContent>
       </CardActionArea>
