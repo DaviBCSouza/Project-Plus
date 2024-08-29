@@ -1,42 +1,38 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useAuth } from "../context/AuthProvider";
-import { initialLoginState, LoginData } from "../types/login";
 import { AlertSeverity } from "../types/signup";
 import api from "../utils/api";
 
-export const useLogin = () => {
+export const useLogout = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [data, setData] = useState<LoginData>(initialLoginState);
 
-  const [openAlert, setOpenAlert] = useState<boolean>(false);
-  const [alertMessage, setAlertMessage] = useState<string>("");
+  const [openAlert, setOpenAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
   const [alertSeverity, setAlertSeverity] = useState<AlertSeverity>("success");
 
   const router = useRouter();
   const { setAuthStatus } = useAuth();
 
-  const login = async (formData: LoginData) => {
+  const logout = async () => {
     setLoading(true);
     setError(null);
-
     try {
-      const response = await api.put("/auth/login", formData);
-
-      setData(response.data);
-      setAlertMessage("Login realizado com sucesso!");
+      await api.delete("/auth/logout");
+      setAlertMessage("Logout realizado com sucesso!");
       setAlertSeverity("success");
-      setAuthStatus(true);
+      setAuthStatus(false);
       setOpenAlert(true);
 
-      // Redirecionar para a tela do recrutador
+      // Redirecionar para a tela de login
       setTimeout(() => {
-        router.push(`/`);
+        router.push("/login");
       }, 2000);
     } catch (err) {
-      setError("Erro ao logar com usuário");
-      setAlertMessage("Erro ao logar com usuário");
+      console.log(err);
+      setError("Erro ao fazer logout");
+      setAlertMessage("Erro ao fazer logout");
       setAlertSeverity("error");
       setOpenAlert(true);
     } finally {
@@ -45,10 +41,9 @@ export const useLogin = () => {
   };
 
   return {
-    login,
+    logout,
     loading,
     error,
-    data,
     openAlert,
     alertMessage,
     alertSeverity,

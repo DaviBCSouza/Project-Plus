@@ -3,8 +3,8 @@ import { useState } from "react";
 import {
   AlertSeverity,
   FormData,
-  UserResponse,
   initialFormState,
+  UserResponse,
 } from "../types/signup";
 import api from "../utils/api";
 

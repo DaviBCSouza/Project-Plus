@@ -11,15 +11,15 @@
     "http"
   ],
   "paths": {
-    "/auth/check": {
+    "/auth/user": {
       "get": {
         "tags": [
           "Auth"
         ],
         "description": "",
         "responses": {
-          "200": {
-            "description": "OK"
+          "default": {
+            "description": ""
           }
         }
       }
@@ -84,7 +84,7 @@
       }
     },
     "/auth/logout": {
-      "post": {
+      "delete": {
         "tags": [
           "Auth"
         ],

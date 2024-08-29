@@ -1,5 +1,6 @@
 "use client";
 
+import { useLogout } from "@/app/hooks/useLogout";
 import {
   AccountCircle,
   AccountTree,
@@ -7,12 +8,14 @@ import {
   Notifications,
 } from "@mui/icons-material";
 import {
+  Alert,
   AppBar,
   Avatar,
   Box,
   IconButton,
   Menu,
   MenuItem,
+  Snackbar,
   styled,
   Toolbar,
   Typography,
@@ -77,9 +80,6 @@ const CustomMenu = styled(Menu)({
 });
 
 export default function Navbar() {
-  // const { logout, openAlert, alertMessage, alertSeverity, setOpenAlert } =
-  //   useLogout();
-
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -91,9 +91,8 @@ export default function Navbar() {
     setAnchorEl(null);
   };
 
-  // const handleLogout = async () => {
-  //   await logout();
-  // };
+  const { logout, openAlert, alertMessage, alertSeverity, setOpenAlert } =
+    useLogout();
 
   return (
     <>
@@ -156,7 +155,12 @@ export default function Navbar() {
                     </Box>
                   </CustomLink>
                 </MenuItem>
-                <MenuItem onClick={handleClose}>
+                <MenuItem
+                  onClick={() => {
+                    handleClose();
+                    logout();
+                  }}
+                >
                   <ExitToApp fontSize="small" sx={{ mr: 1 }} />
                   <Typography color="inherit">Sair</Typography>
                 </MenuItem>
@@ -165,7 +169,7 @@ export default function Navbar() {
           </CustomToolbar>
         </CustomAppBar>
       </CustomBox>
-      {/* <Snackbar
+      <Snackbar
         open={openAlert}
         autoHideDuration={2200}
         onClose={() => setOpenAlert(false)}
@@ -173,7 +177,7 @@ export default function Navbar() {
         <Alert onClose={() => setOpenAlert(false)} severity={alertSeverity}>
           {alertMessage}
         </Alert>
-      </Snackbar> */}
+      </Snackbar>
     </>
   );
 }
