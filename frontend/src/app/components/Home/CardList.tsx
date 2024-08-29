@@ -26,6 +26,10 @@ export default function CardList() {
     fetchProjects();
   }, []);
 
+  const handleAddProject = (newProject: never) => {
+    setProjects((prevProjects: never[]) => [...prevProjects, newProject]);
+  };
+
   if (isLoading) {
     return <CircularProgress />;
   }
@@ -39,7 +43,7 @@ export default function CardList() {
   }
   return (
     <Box>
-      <ModalAddProject />
+      <ModalAddProject onAddProject={handleAddProject} />
       <Box display="flex" flexWrap="wrap" justifyContent="flex-start">
         {projects.map((project: any) => (
           <Card
