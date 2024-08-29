@@ -47,7 +47,7 @@ export default function CardList() {
             image="/assets/images/bg_card.svg"
             title={project.title}
             location={project.location}
-            createBy={project.createBy}
+            createdBy={project.createdBy}
             date={project.date}
           />
         ))}
